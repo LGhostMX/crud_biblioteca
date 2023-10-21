@@ -33,8 +33,9 @@
 <body>
     <div class="container">
         <h2>Ingreso al Sistema</h2>
-        <a href="login/index.php" class="button">Cliente</a></br>
-        <a href="home.php" class="button">Administrador</a>
+
+        <!--<a href="login/index.php" class="button">Cliente</a></br> -->
+        <a href="view/home.php" class="button">Administrador</a>
     </div>
 </body>
 </html>

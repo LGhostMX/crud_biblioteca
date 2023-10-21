@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php 
+    include("../PHP/db_conn.php");
+    $codigo = $_GET['codigo'];
+    ?>
     <title>Formulario de Ingreso</title>
     <style>
         body {
@@ -38,10 +42,27 @@
 </head>
 <body>
     <div class="container">
-        <h2>Formulario de Ingreso</h2>
-        <form action="../controllers/iniciarSesion.php" method="post">
-            <input type="text" id="id" name="id" placeholder="ID" class="input-field" required><br>
-            <input type="tel" id="phone" name="telefono" placeholder="Teléfono" class="input-field" required><br>
+        <h2>Datos del libro solicitado</h2>
+        <?php
+
+            $query = "SELECT * FROM libros WHERE codigo = '$codigo'";
+            $resultado = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_assoc($resultado)){ 
+                
+                echo "<strong>Titulo:</strong> ".$row['titulo']."<br>";
+                echo "<strong>Editorial:</strong> ".$row['editorial']."<br>";
+                echo "<strong>ISBN</strong> ".$row['ISBN']."<br>";
+                echo "<strong>Número de páginas:</strong> ".$row['num_pags']."<br>";
+                
+            }
+                ?>
+
+        <h2>Ingresa tus datos</h2>
+
+        <form action="../controllers/solicitarLibro.php" method="post">
+        <input type="text" name="libro" value="<?php echo $codigo ?>" hidden>
+            <input type="text" id="codigo" name="codigo" placeholder="Codigo de usuario" class="input-field" required><br>
+            <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" class="input-field" required><br>
             <input type="submit" value="Continuar" class="button">
         </form>
     </div>

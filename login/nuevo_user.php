@@ -69,10 +69,13 @@
     </style>
 </head>
 <body>
+    <?php
+    $codigo = $_GET['codigo'];
+    ?>
     <div class="container">
         <h1>Registro de Nuevo Usuario</h1>
         <div class="form-container">
-            <form action="../controllers/nuevoUsuario.php" method="post">
+            <form action="../controllers/nuevoUsuario.php?codigo=<?php echo $codigo ?>" method="post">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
 

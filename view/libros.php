@@ -12,22 +12,36 @@
 
     <?php
     
-    include ("PHP/db_conn.php");
+    include ("../PHP/db_conn.php");
+
+    session_start();
 
     ?>
 
     <nav class="nav navbar bg-dark">
         <div class="container">
-            <a href="index.php">Volver</a>
+        <a href="home.php"><button class="btn btn-info">Regresar</button></a>
         </div>
     </nav>
 
     <div class="container">
+        <br>
+
+        <?php
+            if(isset($_SESSION['message'])){?>
+                <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
+                    <?= $_SESSION['message'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php session_unset(); } ?>
+
+
+
                 <h1>Libros disponibles</h1>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Codigo</th>
+                            <th>#</th>
                             <th>Titulo</th>
                             <th>Editorial</th>
                             <th>ISBN</th>
@@ -48,13 +62,13 @@
                                     <td><?php echo $row['ISBN']; ?></td>
                                     <td><?php echo $row['num_pags']; ?></td>
                                     <td>
-                                        <a href="">
+                                        <a href="../login/index.php?codigo=<?php echo $row['codigo']; ?>">
                                         <button class="btn btn-primary">Solicitar</button>
                                         </a>
-                                        <a href="">
+                                        <a href="editLibro.php?codigo=<?php echo $row['codigo']; ?>">
                                         <button class="btn btn-warning">Editar</button>
                                         </a>
-                                        <a href="">
+                                        <a href="../controllers/deleteLibro.php?codigo=<?php echo $row['codigo']; ?>">
                                         <button class="btn btn-danger">Eliminar</button>
                                         </a>
                                     </td>

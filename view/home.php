@@ -30,13 +30,10 @@ footer {
 </style>
 <body>    
      <h1>Biblioteca</h1>
-     <h3>Bienvenido: #Nombre</h3>
-     <h4>ID: #ID DE USUARIO</h4>
-     <h4>Teléfono: #Teléfono</h4>
     <div class="container">
    
-        <button><a href="ver-libros.html">Ver Libros</a></button>
-        <button><a href="ver-prestamos.html">Ver préstamos </a></button>
+        <button><a href="libros.php">Ver Libros</a></button>
+        <button><a href="prestamos.php">Ver préstamos </a></button>
     </div>
 </body>
 </html>
