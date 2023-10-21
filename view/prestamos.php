@@ -93,7 +93,7 @@
   </style>
 <body>
   <h1>Préstamos</h1>
-  <a href="home.php">
+  <a href="home.html">
   <button class="miscbtn">Regresar</button>
   </a>
   <table>

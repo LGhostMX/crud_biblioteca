@@ -20,7 +20,7 @@
 
     <nav class="nav navbar bg-dark">
         <div class="container">
-        <a href="home.php"><button class="btn btn-info">Regresar</button></a>
+        <a href="home.html"><button class="btn btn-info">Regresar</button></a>
         </div>
     </nav>
 
