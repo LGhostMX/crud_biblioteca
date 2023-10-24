@@ -81,11 +81,11 @@ input[type=submit]:hover {
 
                     <tbody>
                         <?php
-                            $query = "SELECT libros.codigo, libros.titulo, libros.editorial, libros.ISBN, libros.num_pags, GROUP_CONCAT(autores.nombre SEPARATOR ', ') as autores, ejemplares.clasificacion FROM libros INNER JOIN autor_libro ON libros.codigo = autor_libro.codigo_libro INNER JOIN autores ON autores.codigo = autor_libro.codigo_autor INNER JOIN ejemplares ON ejemplares.codigo = libros.codigo GROUP BY libros.codigo;";
+                            $query = "SELECT autor_libro.codigo_libro_autor, libros.codigo, libros.titulo, libros.editorial, libros.ISBN, libros.num_pags, GROUP_CONCAT(autores.nombre SEPARATOR ', ') as autores, ejemplares.clasificacion FROM autor_libro INNER JOIN libros ON libros.codigo = autor_libro.codigo_libro INNER JOIN autores ON autores.codigo = autor_libro.codigo_autor INNER JOIN ejemplares ON ejemplares.codigo = libros.codigo GROUP BY autor_libro.codigo_libro_autor;";
                             $resultado = mysqli_query($conn, $query);
                             while ($row = mysqli_fetch_assoc($resultado)){ ?>
                                 <tr>
-                                    <td><?php echo $row['codigo']; ?></td>
+                                    <td><?php echo $row['codigo_libro_autor']; ?></td>
                                     <td><?php echo $row['titulo']; ?></td>
                                     <td><?php echo $row['editorial']; ?></td>
                                     <td><?php echo $row['ISBN']; ?></td>
@@ -96,10 +96,10 @@ input[type=submit]:hover {
                                         <a href="../login/index.php?codigo=<?php echo $row['codigo']; ?>">
                                         <button class="btn btn-primary">Solicitar</button>
                                         </a>
-                                        <a href="editLibro.php?codigo=<?php echo $row['codigo']; ?>">
+                                        <a href="editLibro.php?codigo=<?php echo $row['codigo_libro_autor']; ?>">
                                         <button class="btn btn-warning">Editar</button>
                                         </a>
-                                        <a href="../controllers/deleteLibro.php?autores=<?php echo $row['autores']?>&titulo=<?php echo $row['titulo']?>&editorial=<?php echo $row['editorial']?>&ISBN=<?php echo $row['ISBN']?>&num_pags=<?php echo $row['num_pags']?>&clasificacion=<?php echo $row['clasificacion']?>">
+                                        <a href="../controllers/deleteLibro.php?autores=<?php echo $row['autores']?>&titulo=<?php echo $row['titulo']?>&editorial=<?php echo $row['editorial']?>&ISBN=<?php echo $row['ISBN']?>&num_pags=<?php echo $row['num_pags']?>&clasificacion=<?php echo $row['clasificacion']?>&codigo=<?php echo $row['codigo_libro_autor'] ?>">
                                         <button class="btn btn-danger">Eliminar</button>
                                         </a>
                                     </td>

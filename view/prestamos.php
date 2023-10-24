@@ -93,10 +93,23 @@
   </style>
 <body>
   <h1>Préstamos</h1>
-  <a href="home.html">
-  <button class="miscbtn">Regresar</button>
-  </a>
-  <table>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+    <a href="home.html" class="">
+    <button class="miscbtn">Regresar</button>
+    </a>
+
+  <?php
+    session_start();
+
+            if(isset($_SESSION['message2'])){?>
+                <div class="alert alert-<?=$_SESSION['message2_type']?> alert-dismissible fade show" role="alert">
+                    <?= $_SESSION['message2'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+    <?php session_unset(); } ?>
+        
+  <table class="table table-striped">
       <thead>
         <tr>
             <th>Código</th>
@@ -127,10 +140,7 @@
                     <td><?php echo $row['fecha_pre']; ?></td>
                     <td><?php echo $row['fecha_dev']; ?></td>
                     <td>
-                        <a href="">
-                        <button class="solicitar-button">Editar</button>
-                        </a>
-                        <a href="">
+                        <a href="../controllers/deletePrestamos.php?codigo=<?php echo $row['ejemplar_usuario']; ?>">
                         <button class="eliminar-button">Eliminar</button>
                         </a>
                     </td>
@@ -139,5 +149,6 @@
              <?php } ?>
       </tbody>
   </table>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
