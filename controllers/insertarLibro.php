@@ -10,8 +10,6 @@
         $ISBN = $_POST["ISBN"];
         $num_pags = $_POST["num_pags"];
         $clasificacion = $_POST["clasificacion"];
-        $fecha_pre = $_POST["fecha_pre"];
-        $fecha_dev = $_POST["fecha_dev"];
         $localizacion = $_POST["localizacion"];
 
         $query_autor = mysqli_query($conn, "INSERT INTO autores (nombre) VALUES ('$autor')");
@@ -29,7 +27,7 @@
         }
         
 
-        $query_ejemplares = mysqli_query($conn, "INSERT INTO ejemplares (clasificacion, fecha_pre, fecha_dev, codigo_lib, localizacion) VALUES ('$clasificacion', '$fecha_pre', '$fecha_dev', '$libros_AI', '$localizacion')");
+        $query_ejemplares = mysqli_query($conn, "INSERT INTO ejemplares (clasificacion, codigo_lib, localizacion) VALUES ('$clasificacion', '$libros_AI', '$localizacion')");
         
         $query_relacion = mysqli_query($conn, "INSERT INTO autor_libro (codigo_autor, codigo_libro) VALUES ('$autor_AI', '$libros_AI')");
 

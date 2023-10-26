@@ -86,6 +86,24 @@
       cursor: pointer;
       
   }
+
+  .busqueda{
+    display: flex;
+    justify-content: end;
+  }
+
+  .barra-busqueda{
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      border: 1px solid red;
+  }
+
+  form {
+    display: flex;
+    justify-content: end;
+    gap: 2em;
+  }
   
   
 
@@ -108,6 +126,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
     <?php session_unset(); } ?>
+
+    <div class="busqueda">
+        <div class="row">
+        <label for="">Buscar por nombre:</label>
+            <form action="" method="POST">
+                <div class="col-8">         
+                    <input class="form-control barra-busqueda" id="myInput" name= "busqueda" type="text" placeholder="Buscar por nombre de usuario">
+                </div>
+                <div class="col-4">
+                <input type="submit" value="Buscar" class="btn btn-success" name="search" onsubmit="">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <?php
+        if(isset($_POST['search'])){
+            $busqueda = $_POST['busqueda'];
+            echo $busqueda;
+        }
+    
+    ?>
         
   <table class="table table-striped">
       <thead>
@@ -127,7 +167,23 @@
         <?php
             include ("../PHP/db_conn.php");
 
-            $query = "SELECT ejemplar_usuario.ejemplar_usuario, usuarios.nombre, usuarios.direccion, usuarios.telefono, libros.titulo, ejemplares.fecha_pre, ejemplares.fecha_dev FROM usuarios INNER JOIN ejemplar_usuario ON usuarios.codigo = ejemplar_usuario.codigo_usuario INNER JOIN libros ON ejemplar_usuario.codigo_ejemplar = libros.codigo INNER JOIN ejemplares ON ejemplar_usuario.codigo_ejemplar = ejemplares.codigo ORDER BY ejemplar_usuario.ejemplar_usuario ASC";
+            $query = "
+            SELECT 
+    ejemplar_usuario.ejemplar_usuario, 
+    usuarios.nombre, 
+    usuarios.direccion, 
+    usuarios.telefono, 
+    libros.titulo, 
+    ejemplar_usuario.fecha_pre, 
+    ejemplar_usuario.fecha_dev 
+FROM 
+    usuarios 
+INNER JOIN 
+    ejemplar_usuario ON usuarios.codigo = ejemplar_usuario.codigo_usuario 
+INNER JOIN 
+    libros ON ejemplar_usuario.codigo_ejemplar = libros.codigo 
+ORDER BY 
+    ejemplar_usuario.ejemplar_usuario ASC";
             $resultado = mysqli_query($conn, $query);
             while($row = mysqli_fetch_assoc($resultado)){ ?>
 
@@ -149,6 +205,8 @@
              <?php } ?>
       </tbody>
   </table>
+  <script>
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

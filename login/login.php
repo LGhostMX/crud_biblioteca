@@ -63,6 +63,10 @@
         <input type="text" name="libro" value="<?php echo $codigo ?>" hidden>
             <input type="text" id="codigo" name="codigo" placeholder="Codigo de usuario" class="input-field" required><br>
             <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" class="input-field" required><br>
+            <label for="">Ingresa la fecha de préstamo</label>
+            <input type="date" id="fecha_pre" name="fecha_pre" class="input-field" required><br>
+            <label for="">Ingresa la fecha de devolución</label>
+            <input type="date" id="fecha_dev" name="fecha_dev" class="input-field" required><br>
             <input type="submit" value="Continuar" class="button">
         </form>
     </div>

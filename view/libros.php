@@ -134,12 +134,6 @@ input[type=submit]:hover {
         <label for="clasificacion">Clasificacion:</label><br>
         <input type="text" id="clasificacion" name="clasificacion" required><br>
 
-        <label for="fecha_pre">Fecha de Prestamo:</label><br>
-        <input type="date" id="fecha_pre" name="fecha_pre" required><br><br>
-
-        <label for="fecha_dev">Fecha de Devolucion:</label><br>
-        <input type="date" id="fecha_dev" name="fecha_dev" required><br><br>
-
         <label for="localizacion">Localización:</label><br>
         <input type="text" id="localizacion" name="localizacion" required ><br>
 
