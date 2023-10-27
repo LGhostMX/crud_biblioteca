@@ -144,46 +144,68 @@
     <?php
         if(isset($_POST['search'])){
             $busqueda = $_POST['busqueda'];
-            echo $busqueda;
         }
     
     ?>
         
-  <table class="table table-striped">
-      <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Ejemplar</th>
-            <th>Fecha de préstamo</th>
-            <th>Fecha de devolución</th>
-            <th>Acciones</th>
-        </tr>
+  <table class="table table-striped text-center">
+      <thead class="thead-dark">
+        <tbody>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Ejemplar</th>
+                <th scope="col">Fecha de préstamo</th>
+                <th scope="col">Fecha de devolución</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </tbody>
       </thead>
       
       <tbody>
         <?php
             include ("../PHP/db_conn.php");
 
-            $query = "
+            if(isset($busqueda)){
+                $query = "
             SELECT 
-    ejemplar_usuario.ejemplar_usuario, 
-    usuarios.nombre, 
-    usuarios.direccion, 
-    usuarios.telefono, 
-    libros.titulo, 
-    ejemplar_usuario.fecha_pre, 
-    ejemplar_usuario.fecha_dev 
-FROM 
-    usuarios 
-INNER JOIN 
-    ejemplar_usuario ON usuarios.codigo = ejemplar_usuario.codigo_usuario 
-INNER JOIN 
-    libros ON ejemplar_usuario.codigo_ejemplar = libros.codigo 
-ORDER BY 
-    ejemplar_usuario.ejemplar_usuario ASC";
+                    ejemplar_usuario.ejemplar_usuario, 
+                    usuarios.nombre, 
+                    usuarios.direccion, 
+                    usuarios.telefono, 
+                    libros.titulo, 
+                    ejemplar_usuario.fecha_pre, 
+                    ejemplar_usuario.fecha_dev 
+                FROM 
+                    usuarios 
+                INNER JOIN 
+                    ejemplar_usuario ON usuarios.codigo = ejemplar_usuario.codigo_usuario 
+                INNER JOIN 
+                    libros ON ejemplar_usuario.codigo_ejemplar = libros.codigo
+                WHERE
+                    usuarios.nombre LIKE '%$busqueda%'
+                ORDER BY 
+                    ejemplar_usuario.ejemplar_usuario ASC";
+            }else{
+                    $query = "SELECT 
+                    ejemplar_usuario.ejemplar_usuario, 
+                    usuarios.nombre, 
+                    usuarios.direccion, 
+                    usuarios.telefono, 
+                    libros.titulo, 
+                    ejemplar_usuario.fecha_pre, 
+                    ejemplar_usuario.fecha_dev 
+                FROM 
+                    usuarios 
+                INNER JOIN 
+                    ejemplar_usuario ON usuarios.codigo = ejemplar_usuario.codigo_usuario 
+                INNER JOIN 
+                    libros ON ejemplar_usuario.codigo_ejemplar = libros.codigo 
+                ORDER BY 
+                    ejemplar_usuario.ejemplar_usuario ASC";
+            }
             $resultado = mysqli_query($conn, $query);
             while($row = mysqli_fetch_assoc($resultado)){ ?>
 
